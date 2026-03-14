@@ -1,5 +1,5 @@
 # Java base 24
-FROM eclipse-temurin:24-jre AS build
+FROM eclipse-temurin:24-jre
 
 # Create workdir
 WORKDIR /app
