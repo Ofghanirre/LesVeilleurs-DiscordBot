@@ -1,15 +1,26 @@
-# Java base 24
+# -------- Build stage --------
+FROM maven:3.9.9-eclipse-temurin-24 AS build
+
+WORKDIR /build
+
+# Copy project
+COPY pom.xml .
+COPY src ./src
+
+# Build jar
+RUN mvn -B package --no-transfer-progress
+
+# -------- Runtime stage --------
 FROM eclipse-temurin:24-jre
 
-# Create workdir
 WORKDIR /app
 
-# Copy jar and config
-COPY target/LesVeilleursDiscordBot-1.0-SNAPSHOT-jar-with-dependencies.jar app.jar
+# Copy built jar
+COPY --from=build /build/target/*jar-with-dependencies.jar app.jar
+
+# Copy config
 COPY config/ ./config/
 
-# Cloud Run port
 ENV PORT=8080
 
-# Launch bot
 CMD ["java", "-jar", "app.jar"]
