@@ -36,17 +36,16 @@ public final class LVDMBot {
         }
         builtinMethods();
 
-        bot.getGuilds().forEach(guild -> {
-            guild.retrieveCommands().queue(existingCommands -> {
-                existingCommands.stream()
-                        .filter(c -> c.getName().equals("lvdm"))
-                        .forEach(c -> c.delete().queue());
+        bot.getGuilds().forEach(guild ->
+                guild.retrieveCommands().queue(existingCommands -> {
+                    existingCommands.stream()
+                            .filter(c -> c.getName().equals("lvdm"))
+                            .forEach(c -> c.delete().queue());
 
-                guild.upsertCommand("lvdm", "Les veilleurs de Monde's bot commands")
-                        .addSubcommands(commandManager.getRegisteredCommandsData())
-                        .queue();
-            });
-        });
+                    guild.upsertCommand("lvdm", "Les veilleurs de Monde's bot commands")
+                            .addSubcommands(commandManager.getRegisteredCommandsData())
+                            .queue();
+                }));
 
 
         guildContentManager.load();

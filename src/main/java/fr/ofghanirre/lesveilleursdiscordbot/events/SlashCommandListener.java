@@ -21,8 +21,6 @@ public class SlashCommandListener extends ListenerAdapter {
         if (sub == null)
             return;
 
-        manager.get(sub).ifPresent(cmd -> {
-            cmd.execute(event);
-        });
+        manager.get(sub).ifPresent(cmd -> cmd.execute(event));
     }
 }

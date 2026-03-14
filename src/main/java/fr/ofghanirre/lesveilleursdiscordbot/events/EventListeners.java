@@ -36,7 +36,7 @@ public final class EventListeners extends ListenerAdapter {
                 Category parent = channelLeft.getParentCategory();
 
                 if (parent != null && parent.getIdLong() == content.categoryId()) {
-                    Object lock = channelsLock.computeIfAbsent(channelLeft.getIdLong(), k -> new Object());
+                    Object lock = channelsLock.computeIfAbsent(channelLeft.getIdLong(), _ -> new Object());
 
                     synchronized (lock) {
                         if (guild.getVoiceChannelById(channelLeft.getIdLong()) == null) return;
