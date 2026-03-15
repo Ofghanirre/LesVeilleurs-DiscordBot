@@ -9,7 +9,9 @@ import fr.ofghanirre.lesveilleursdiscordbot.events.SlashCommandListener;
 import fr.ofghanirre.lesveilleursdiscordbot.guildcontent.GuildContentManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 public final class LVDMBot {
@@ -44,6 +46,7 @@ public final class LVDMBot {
 
                     guild.upsertCommand("lvdm", "Les veilleurs de Monde's bot commands")
                             .addSubcommands(commandManager.getRegisteredCommandsData())
+                            .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR))
                             .queue();
                 }));
 
