@@ -11,6 +11,17 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Handles Discord guild events, specifically voice channel updates.
+ *
+ * <p>This listener automatically creates temporary voice channels
+ * when users join the designated entry channel and deletes them
+ * when they become empty.</p>
+ *
+ * <p>It uses a {@link GuildContentManager} to store guild-specific
+ * configuration and a concurrent lock map to prevent race conditions
+ * when deleting channels.</p>
+ */
 public final class EventListeners extends ListenerAdapter {
     private final GuildContentManager manager;
     private final ConcurrentHashMap<Long, Object> channelsLock = new ConcurrentHashMap<>();
@@ -19,6 +30,16 @@ public final class EventListeners extends ListenerAdapter {
         this.manager = manager;
     }
 
+
+    /**
+     * Handles voice channel updates.
+     *
+     * <p>When a member joins the entry voice channel, a new temporary
+     * voice channel is created and the member is moved there.
+     * When a temporary channel becomes empty, it is automatically deleted.</p>
+     *
+     * @param event the guild voice update event
+     */
     @Override
     public void onGuildVoiceUpdate(GuildVoiceUpdateEvent event) {
         final var guild = event.getGuild();
@@ -55,10 +76,25 @@ public final class EventListeners extends ListenerAdapter {
         });
     }
 
-    private static void deleteOldDiscussion(AudioChannelUnion channelLeft) {
-        channelLeft.delete().queue();
+    /**
+     * Deletes an empty temporary voice channel.
+     *
+     * @param channel the channel to delete
+     */
+    private static void deleteOldDiscussion(AudioChannelUnion channel) {
+        channel.delete().queue();
     }
 
+    /**
+     * Creates a new temporary voice channel and moves the member into it.
+     *
+     * <p>The new channel is created under the configured category and
+     * grants the member permissions to manage and speak in it.</p>
+     *
+     * @param guild   the guild where the channel is created
+     * @param content the guild configuration
+     * @param event   the voice update event that triggered the creation
+     */
     private void createNewDiscussion(Guild guild, GuildContent content, GuildVoiceUpdateEvent event) {
         final var member = event.getMember();
         final var name = "%s's discussion".formatted(member.getUser().getEffectiveName());

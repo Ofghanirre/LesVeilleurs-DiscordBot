@@ -2,9 +2,20 @@ package fr.ofghanirre.lesveilleursdiscordbot;
 
 import java.io.IOException;
 
+/**
+ * Main entry point of the Les Veilleurs Discord Bot application.
+ *
+ * <p>This class is responsible for initializing the application
+ * and starting the bot instance.</p>
+ */
 public class Main {
     private static LVDMBot bot;
 
+    /**
+     * Application entry point.
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
         Config.extractToken().ifPresentOrElse(token -> {
             System.out.println("Starting discord BOT...");

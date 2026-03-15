@@ -29,7 +29,8 @@ Le bot permet aux utilisateurs de créer automatiquement leur propre salon vocal
 4. Lorsque le salon devient vide :
     - il est **automatiquement supprimé**
 
-Cela permet aux membres de créer facilement des discussions privées sans encombrer le serveur avec des salons permanents.
+Cela permet aux membres de créer facilement des discussions privées sans encombrer le serveur avec des salons
+permanents.
 
 ---
 
@@ -37,11 +38,11 @@ Cela permet aux membres de créer facilement des discussions privées sans encom
 
 Toutes les commandes nécessitent la permission **Administrator**.
 
-| Commande | Description |
-|--------|--------|
+| Commande      | Description                                               |
+|---------------|-----------------------------------------------------------|
 | `/lvdm setup` | Configure les salons nécessaires au fonctionnement du bot |
-| `/lvdm clear` | Supprime les salons temporaires créés par le bot |
-| `/lvdm ping` | Vérifie si le bot est en ligne |
+| `/lvdm clear` | Supprime les salons temporaires créés par le bot          |
+| `/lvdm ping`  | Vérifie si le bot est en ligne                            |
 
 ---
 

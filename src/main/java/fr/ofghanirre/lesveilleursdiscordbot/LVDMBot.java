@@ -14,6 +14,16 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
+/**
+ * Represents the Les Veilleurs de Monde Discord Bot.
+ *
+ * <p>This class initializes the bot, registers commands, manages guild
+ * content, and sets up event listeners using JDA.</p>
+ *
+ * <p>The bot automatically creates temporary voice channels, handles
+ * slash commands under the "lvdm" namespace, and persists guild data
+ * to a JSON file.</p>
+ */
 public final class LVDMBot {
     private final JDA bot;
     private final CommandManager commandManager;
@@ -29,6 +39,10 @@ public final class LVDMBot {
                 .build();
     }
 
+    /**
+     * Starts the bot by setting presence, registering built-in commands,
+     * loading guild content, and updating slash commands for all guilds.
+     */
     public void start() {
         bot.getPresence().setActivity(Activity.playing("Starting..."));
         try {
@@ -61,6 +75,9 @@ public final class LVDMBot {
         commandManager.register(new ClearCommand(guildContentManager));
     }
 
+    /**
+     * Shuts down the bot by saving all guild data and updating the bot presence.
+     */
     public void shutdown() {
         bot.getPresence().setActivity(Activity.playing("Shutting down..."));
         guildContentManager.save();

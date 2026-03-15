@@ -2,7 +2,12 @@ package fr.ofghanirre.lesveilleursdiscordbot.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
-public class PingCommand implements ISlashCommand {
+/**
+ * Simple diagnostic command used to verify that the bot is running.
+ *
+ * <p>When executed, the bot replies with a confirmation message.</p>
+ */
+public final class PingCommand implements ISlashCommand {
     @Override
     public String getName() {
         return "ping";

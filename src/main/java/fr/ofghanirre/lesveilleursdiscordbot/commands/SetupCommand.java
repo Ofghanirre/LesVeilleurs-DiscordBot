@@ -7,7 +7,14 @@ import net.dv8tion.jda.api.entities.channel.concrete.Category;
 import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
-public class SetupCommand implements ISlashCommand {
+/**
+ * Administrative command responsible for initializing the bot
+ * configuration for a guild.
+ *
+ * <p>This command creates the category and entry voice channel used
+ * to generate temporary voice channels.</p>
+ */
+public final class SetupCommand implements ISlashCommand {
     private static final String CATEGORY_NAME = "== Temporary Discussions ==";
     private static final String VOICE_CHANNEL_NAME = "🍻 Create discussion";
 
@@ -27,6 +34,12 @@ public class SetupCommand implements ISlashCommand {
         return "setup the discord server: creating the channel and categories";
     }
 
+    /**
+     * Initializes the bot configuration for the guild by creating
+     * the required category and voice channel if they do not exist.
+     *
+     * @param event the slash command interaction event
+     */
     @Override
     public void execute(SlashCommandInteractionEvent event) {
         Guild guild = event.getGuild();

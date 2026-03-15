@@ -1,5 +1,12 @@
 package fr.ofghanirre.lesveilleursdiscordbot.guildcontent;
 
+/**
+ * Represents the stored configuration for a Discord guild.
+ *
+ * <p>This class keeps track of the guild ID, the category used
+ * for temporary voice channels, and the main voice channel
+ * that triggers new temporary channels.</p>
+ */
 public final class GuildContent {
     private final long guildId;
     private long categoryId;
