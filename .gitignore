@@ -42,3 +42,4 @@ build/
 .env
 *.log
 **/config.properties
+**/guilds_data.json

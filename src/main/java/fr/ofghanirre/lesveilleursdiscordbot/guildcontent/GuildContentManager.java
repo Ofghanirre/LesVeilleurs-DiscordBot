@@ -19,7 +19,7 @@ public final class GuildContentManager {
     /**
      * File where guild configuration is stored.
      */
-    private final File file = new File("guilds_data.json");
+    private final File file = new File("/app/config/guilds_data.json");
     private final Gson gson = new Gson();
 
     /**

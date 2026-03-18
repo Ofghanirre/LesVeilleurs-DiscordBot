@@ -19,7 +19,7 @@ WORKDIR /app
 COPY --from=build /build/target/*jar-with-dependencies.jar app.jar
 
 # Copy config
-COPY config/ ./config/
+RUN mkdir -p /app/config
 
 ENV PORT=8080
 
